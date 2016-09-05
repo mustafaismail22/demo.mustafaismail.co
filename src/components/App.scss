@@ -1,0 +1,58 @@
+@import '~normalize.css';
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: sans-serif;
+}
+
+html, body {
+	min-height: 100%;
+	overflow: hidden;
+}
+
+body {
+	background: #727272;
+}
+
+a, svg {
+	transition: all .2s ease-in-out;
+}
+
+:global {
+	.clearfix:before,
+	.clearfix:after {
+		content: "";
+		display: table;
+	}
+
+	.clearfix:after {
+		clear: both;
+	}
+
+	.pull-right {
+		float: right !important;
+	}
+
+	.pull-left {
+		float: left !important;
+	}
+
+	.hide {
+		display: none !important;
+	}
+
+	.show {
+		display: block !important;
+	}
+
+	@media (max-width:767px) {
+		.hidden-xs {
+			display: none;
+		}
+	}
+}
