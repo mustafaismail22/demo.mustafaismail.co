@@ -22,7 +22,7 @@ const render = function (component, assets, key = JSON.stringify(component)) {
     let renderedMarkup = markupCache.get(key)
 
     if (!renderedMarkup) {
-      renderedMarkup = '<!doctype html> \n' + ReactDOM.renderToString(
+      renderedMarkup = '<!doctype html> \n' + ReactDOM.renderToStaticMarkup(
         <Html
           assets={assets}
           content={ component ? ReactDOM.renderToString(component) : null }

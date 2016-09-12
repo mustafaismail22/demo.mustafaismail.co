@@ -25,8 +25,7 @@ class Html extends Component {
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
           { Object.keys(assets.styles).map((style, key) =>
-            <link href={assets.styles[style]} key={key} media="screen, projection"
-              rel="stylesheet" type="text/css" charSet="UTF-8" />
+            <link rel="stylesheet" href={assets.styles[style]} key={key} type="text/css" />
           ) }
 
           {/* (will be present only in development mode) */}
@@ -37,12 +36,12 @@ class Html extends Component {
 
           { helmet.script.toComponent() }
         </head>
-        <body>
+        <body className="no-js">
           <div id="app" dangerouslySetInnerHTML={{ __html: content || 'Loading...' }} />
 
           { Object.keys(assets.javascript).map((i, key) =>
-            <script src={assets.javascript[i]} key={key} charSet="UTF-8" />) }
-          <script charSet="UTF-8" dangerouslySetInnerHTML={{ __html: `(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', '${googleAnalyticsId}'); ga('send', 'pageview');` }} />
+            <script src={assets.javascript[i]} key={key} />) }
+          <script dangerouslySetInnerHTML={{ __html: `(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', '${googleAnalyticsId}'); ga('send', 'pageview');` }} />
         </body>
       </html>
     )
