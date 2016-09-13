@@ -4,7 +4,11 @@ import App from './components/App'
 
 import products from './data/products.json'
 
-document.body.className = document.body.className.replace('no-js', 'js')
+document.body.classList.remove('no-js')
+document.body.classList.add('js')
+if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+  document.body.classList.add('ios')
+}
 
 ReactDom.render(
   <App products={products} />,

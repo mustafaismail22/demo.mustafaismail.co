@@ -7,19 +7,8 @@ class Iframe extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: true,
-      height: null,
-      width: null
+      loading: true
     }
-  }
-
-  componentDidMount () {
-    window.addEventListener('resize', this.handleWindowResize.bind(this))
-    this.setState(this.iframeDimensions())
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('resize', this.handleWindowResize.bind(this))
   }
 
   componentWillReceiveProps (nextProps) {
@@ -31,33 +20,8 @@ class Iframe extends Component {
     }
 
     this.setState({
-      loading,
-      ...this.iframeDimensions(nextProps)
+      loading
     })
-  }
-
-  iframeDimensions (props = this.props) {
-    const { viewport, currentProduct } = props
-    let height = window.innerHeight - 60
-    let width = window.innerWidth
-
-    if (currentProduct.responsive) {
-      switch (viewport) {
-        case 'mobile':
-          width = width < 480 ? width : 480
-          break
-        case 'tablet':
-          width = width < 768 ? width : 768
-          break
-        case 'desktop':
-          break
-      }
-    }
-
-    return {
-      height,
-      width
-    }
   }
 
   handleOnLoad (e) {
@@ -66,25 +30,23 @@ class Iframe extends Component {
     })
   }
 
-  handleWindowResize () {
-    this.setState(this.iframeDimensions())
-  }
-
   render () {
-    const { height, width, loading } = this.state
-    const className = classnames(style.root, {
+    const { loading } = this.state
+    const { viewport, currentProduct } = this.props
+
+    const className = classnames(style.holder, style[viewport], {
       [style.loading]: loading
     })
 
     return (
-      <iframe
-        src={this.props.currentProduct.url}
-        onLoad={this.handleOnLoad.bind(this)}
-        onError={this.handleOnLoad.bind(this)}
-        className={className}
-        height={height}
-        width={width}>
-      </iframe>
+      <div className={className}>
+        <iframe
+          className={style.iframe}
+          src={currentProduct.url}
+          onLoad={this.handleOnLoad.bind(this)}
+          onError={this.handleOnLoad.bind(this)} >
+        </iframe>
+      </div>
     )
   }
 }
