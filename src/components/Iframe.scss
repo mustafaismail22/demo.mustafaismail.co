@@ -22,17 +22,6 @@
   }
 }
 
-:global {
-  .ios {
-    :local {
-      .holder {
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-    }
-  }
-}
-
 .iframe {
   display: block;
   height: 100% !important;

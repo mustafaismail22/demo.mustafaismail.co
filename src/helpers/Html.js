@@ -23,6 +23,8 @@ class Html extends Component {
 
           <link rel="shortcut icon" href="/favicon.ico" />
 
+          <script dangerouslySetInnerHTML={{ __html: `if (top !== self) top.location.replace(self.location.href); // Hey, don't iframe my iframe!` }} />
+
           {/* styles (will be present only in production with webpack extract text plugin) */}
           { Object.keys(assets.styles).map((style, key) =>
             <link rel="stylesheet" href={assets.styles[style]} key={key} type="text/css" />

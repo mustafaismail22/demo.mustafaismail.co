@@ -8,29 +8,18 @@ import SwitcherBar from './SwitcherBar'
 import Iframe from './Iframe'
 import ProductsList from './ProductsList'
 
+import { getActiveProduct } from '../helpers'
+
 class App extends Component {
   constructor (props) {
     super(props)
 
     this.history = typeof document !== 'undefined' ? createHistory() : createMemoryHistory()
     this.state = {
-      active: this.getActiveProduct(props.products, props.location),
+      active: getActiveProduct(props.products, props.location),
       viewport: 'desktop',
       switcher: false
     }
-  }
-
-  getActiveProduct (products, location = window.location) {
-    let product = location.search.replace('?theme=', '').toLowerCase()
-
-    if (!products.hasOwnProperty(product)) {
-      product = location.hash.replace('#', '')
-      if (!products.hasOwnProperty(product)) {
-        product = Object.keys(products).shift()
-      }
-    }
-
-    return product
   }
 
   toggleViewport (type) {
@@ -47,7 +36,7 @@ class App extends Component {
 
   componentDidMount () {
     this.historyUnlisten = this.history.listen(location => this.setState({
-      active: this.getActiveProduct(this.props.products, location)
+      active: getActiveProduct(this.props.products, location)
     }))
   }
 
